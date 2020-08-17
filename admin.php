@@ -116,11 +116,9 @@ class ContactForm7Datepicker_Admin {
 		$successmsg = '<div id="message" class="updated fade"><p><strong>' . __('Options saved.') . '</strong></p></div>';
 		$errormsg = '<div id="message" class="error fade"><p><strong>' . __('Options could not be saved.') . '</strong></p></div>';
 
-		if (! isset($_POST['ui_theme']))
+		if (!isset($_POST['ui_theme']) || !current_user_can('editor') || !current_user_can('administrator') || !is_admin()) {
 			die($errormsg);
-
-		if (! is_admin())
-			die($errormsg);
+		}
 
 		$theme = trim($_POST['ui_theme']);
 
